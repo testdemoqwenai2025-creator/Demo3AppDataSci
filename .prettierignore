@@ -1,0 +1,14 @@
+# Code directories + key configs only
+.next/
+out/
+node_modules/
+bun.lock
+download/
+public/images/
+*.db
+*.db-journal
+prisma/dev.db
+dev.log
+server.log
+agent-ctx/
+worklog.md

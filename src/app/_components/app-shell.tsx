@@ -150,8 +150,8 @@ const GROUPS: Array<{ title: string; ids: PageId[] }> = [
 ];
 
 const CONTACT_EMAIL = "testdemoqwenai2025@gmail.com";
-const PUBLIC_REPO_URL = "https://github.com/testdemoqwenai2025-creator/Demo2DataSciEng";
-const PRIVATE_REPO_URL = "https://github.com/testdemoqwenai2025-creator/AppDataSciEng2-Advance";
+const PUBLIC_REPO_URL = "https://github.com/testdemoqwenai2025-creator/Demo3AppDataSci";
+const PRIVATE_REPO_URL = "https://github.com/testdemoqwenai2025-creator/AppDataSci3-Advanced";
 
 function SidebarNav({ active, onNavigate }: { active: PageId; onNavigate?: () => void }) {
   const [sortByFreshness, setSortByFreshness] = useState(false);

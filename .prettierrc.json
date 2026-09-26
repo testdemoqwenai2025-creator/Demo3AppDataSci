@@ -1,0 +1,20 @@
+# Prettier configuration — https://prettier.io/docs/configuration
+# Matches the existing 2-space indent used throughout the codebase.
+
+printWidth: 100
+tabWidth: 2
+semi: true
+singleQuote: false
+trailingComma: "all"
+bracketSpacing: true
+arrowParens: "always"
+endOfLine: "lf"
+
+# Don't reformat large data files
+overrides:
+  - files: ["*.json", "package.json", "tsconfig.json"]
+    options:
+      tabWidth: 2
+  - files: ["*.md"]
+    options:
+      proseWrap: "preserve"

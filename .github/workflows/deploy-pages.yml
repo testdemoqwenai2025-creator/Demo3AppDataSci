@@ -1,9 +1,9 @@
 # ============================================================
 # Deploy the static export to GitHub Pages on every push to main.
 # Builds the Next.js app with GITHUB_PAGES=true (static export +
-# basePath=/Demo2DataSciEng), then publishes to the gh-pages branch.
+# basePath=/Demo3AppDataSci), then publishes to the gh-pages branch.
 # GitHub Pages serves from gh-pages at the project URL:
-#   https://testdemoqwenai2025-creator.github.io/Demo2DataSciEng/
+#   https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/
 # ============================================================
 name: Deploy to GitHub Pages
 

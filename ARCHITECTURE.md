@@ -101,13 +101,13 @@ Two Thompson sampling bandits power adaptive behaviour:
 ## The sync + deploy pipeline
 
 ```
-Private repo (AppDataSci-Advanced)
+Private repo (AppDataSci3-Advanced)
   ↓ push to main
   ↓
 sync-to-public.yml workflow
   ↓ force-push to public repo
   ↓
-DemoAppDataSci (public)
+Demo3AppDataSci (public)
   ↓ push to main
   ↓
 deploy-pages.yml workflow
@@ -115,12 +115,12 @@ deploy-pages.yml workflow
   ↓ excludes src/app/api/ (Next.js export doesn't support API routes)
   ↓ deploy to GitHub Pages via actions/deploy-pages@v4
   ↓
-https://testdemoqwenai2025-creator.github.io/DemoAppDataSci/
+https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/
 ```
 
 ### Workflow guard
 
-The sync workflow has a `if: github.repository == 'testdemoqwenai2025-creator/AppDataSci-Advanced'` guard — it only runs on the private repo, not on the public mirror (where it would try to "sync to itself" and fail without the secret).
+The sync workflow has a `if: github.repository == 'testdemoqwenai2025-creator/AppDataSci3-Advanced'` guard — it only runs on the private repo, not on the public mirror (where it would try to "sync to itself" and fail without the secret).
 
 ## The routing architecture
 

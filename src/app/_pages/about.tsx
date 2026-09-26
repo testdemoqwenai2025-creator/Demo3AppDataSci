@@ -28,8 +28,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 
-const PUBLIC_REPO_URL = "https://github.com/testdemoqwenai2025-creator/DemoAppDataSci";
-const PRIVATE_REPO_URL = "https://github.com/testdemoqwenai2025-creator/AppDataSci-Advanced";
+const PUBLIC_REPO_URL = "https://github.com/testdemoqwenai2025-creator/Demo3AppDataSci";
+const PRIVATE_REPO_URL = "https://github.com/testdemoqwenai2025-creator/AppDataSci3-Advanced";
 const CONTACT_EMAIL = "testdemoqwenai2025@gmail.com";
 
 const GDPR_RIGHTS = [
@@ -58,6 +58,31 @@ const STACK = [
   { name: "Unity Catalogue", icon: ShieldCheck, page: "governance" as const },
   { name: "Git + GitHub Actions", icon: GitMerge, page: "cicd" as const },
   { name: "Reference architecture", icon: Network, page: "architecture" as const },
+];
+
+// Build genealogy — every major phase of the platform, newest last.
+const BUILD_GENEALOGY = [
+  {
+    when: "Phase 1 · 2025-Q3",
+    id: "v1.0",
+    name: "Initial 15-page MPA + sync-to-public workflow",
+    desc: "First reference architecture: Snowflake + Databricks + dbt + Tableau, hash routing, Knowledge Shorts, deploy to GitHub Pages via DemoAppDataSci (now superseded by Demo3AppDataSci). Public/private mirror sync first established.",
+    tags: ["AppDataSci-Advanced", "DemoAppDataSci", "15 pages", "GitHub Pages"],
+  },
+  {
+    when: "Phase 2 · 2025-Q4",
+    id: "v2.0",
+    name: "AppDataSciEng2-Advance — 130+ topic expansion",
+    desc: "Expanded from 15 architecture pages to 130+ pages spanning data engineering, ML, GenAI, computational biology, chemistry, physics, fintech, space science. Added Living Equations (interactive Pyodide), skill graph, 3D quantum/fintech/space galleries, deeper-thought cards, contextual bandit for next-page recommendation.",
+    tags: ["AppDataSciEng2-Advance", "Demo2DataSciEng", "130+ pages", "Pyodide", "D3 + three.js"],
+  },
+  {
+    when: "Phase 3 · 2026-Q1",
+    id: "v3.0",
+    name: "AppDataSci3-Advanced — Tier 3 strategic initiatives",
+    desc: "Current upstream. Adds Husky pre-commit guardrails (lint + typecheck + secret scan), expanded About page with build genealogy, navigation improvements, and the Tier 3 multi-session flagship: Skill Constellation Explorer (interactive 3D graph surfacing connections across all 130+ topics).",
+    tags: ["AppDataSci3-Advanced", "Demo3AppDataSci", "Tier 3", "Guardrails", "Skill Constellation"],
+  },
 ];
 
 export function AboutPage() {
@@ -89,9 +114,9 @@ export function AboutPage() {
             data scientists, analysts, architects and business stakeholders across nine markets.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-            The reference architecture is shared publicly via the DemoAppDataSci repository so that interested
+            The reference architecture is shared publicly via the Demo3AppDataSci repository so that interested
             parties can preview the platform, design and code without signing an NDA. Modifications and the full
-            advanced configuration live in the private AppDataSci-Advanced repository, where the team iterates
+            advanced configuration live in the private AppDataSci3-Advanced repository, where the team iterates
             on changes before they are mirrored back to the public preview.
           </p>
         </div>
@@ -209,7 +234,7 @@ export function AboutPage() {
           <div className="rounded-md border border-border/60 p-4 bg-muted/20">
             <div className="flex items-center gap-2 mb-2">
               <Github className="h-4 w-4" />
-              <p className="font-semibold text-sm">DemoAppDataSci</p>
+              <p className="font-semibold text-sm">Demo3AppDataSci</p>
               <Badge variant="outline" className="ml-auto text-[10px]">Public</Badge>
             </div>
             <p className="text-xs text-muted-foreground mb-3">
@@ -227,7 +252,7 @@ export function AboutPage() {
           <div className="rounded-md border border-border/60 p-4 bg-muted/20">
             <div className="flex items-center gap-2 mb-2">
               <Lock className="h-4 w-4 text-primary" />
-              <p className="font-semibold text-sm">AppDataSci-Advanced</p>
+              <p className="font-semibold text-sm">AppDataSci3-Advanced</p>
               <Badge variant="outline" className="ml-auto text-[10px]">Private</Badge>
             </div>
             <p className="text-xs text-muted-foreground mb-3">
@@ -246,11 +271,51 @@ export function AboutPage() {
         <div className="mt-4 rounded-md border border-dashed border-border/60 p-3 bg-muted/10">
           <p className="text-xs text-muted-foreground leading-relaxed">
             <strong className="text-foreground">Sync workflow:</strong> The private repo is the upstream. On every
-            push to <code className="font-mono">main</code> on <code className="font-mono">AppDataSci-Advanced</code>,
-            a GitHub Actions workflow pushes the same commit to <code className="font-mono">DemoAppDataSci</code>.
+            push to <code className="font-mono">main</code> on <code className="font-mono">AppDataSci3-Advanced</code>,
+            a GitHub Actions workflow pushes the same commit to <code className="font-mono">Demo3AppDataSci</code>.
             The public mirror therefore always reflects the latest state of the advanced repo, with no manual
-            intervention. Previewers can clone or browse <code className="font-mono">DemoAppDataSci</code> freely;
-            contributors commit to <code className="font-mono">AppDataSci-Advanced</code>.
+            intervention. Previewers can clone or browse <code className="font-mono">Demo3AppDataSci</code> freely;
+            contributors commit to <code className="font-mono">AppDataSci3-Advanced</code>.
+          </p>
+        </div>
+      </SectionCard>
+
+      {/* Build history & genealogy */}
+      <SectionCard
+        title="Build history & genealogy"
+        description="How this platform evolved — from the first public preview mirror to the current multi-repo Tier 3 architecture."
+        icon={<GitBranch className="h-5 w-5" />}
+      >
+        <ol className="relative border-l border-border/60 ml-2 space-y-5">
+          {BUILD_GENEALOGY.map((phase) => (
+            <li key={phase.id} className="ml-5">
+              <span className="absolute -left-2 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-primary/20 ring-2 ring-background">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              <p className="text-xs font-mono text-muted-foreground">{phase.when}</p>
+              <p className="font-semibold text-sm mt-0.5">{phase.id} — {phase.name}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed mt-1">{phase.desc}</p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {phase.tags.map((t) => (
+                  <span
+                    key={t}
+                    className="text-[10px] px-1.5 py-0.5 rounded-full font-mono bg-muted text-muted-foreground"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className="mt-5 rounded-md border border-dashed border-border/60 p-3 bg-muted/10">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            <strong className="text-foreground">Current upstream:</strong>{" "}
+            <code className="font-mono">AppDataSci3-Advanced</code> (private, Tier 3 strategic initiatives).
+            Every commit to <code className="font-mono">main</code> syncs to{" "}
+            <code className="font-mono">Demo3AppDataSci</code> (public mirror, NDA-free preview) via GitHub Actions.
+            See the <Link href={hrefFor("genealogy")} className="text-primary hover:underline">genealogy page</Link>{" "}
+            for the full topic-level timeline of all 130+ pages.
           </p>
         </div>
       </SectionCard>

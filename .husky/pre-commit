@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+# Husky pre-commit hook — runs lint-staged on staged files.
+# Bypass with: git commit --no-verify (use sparingly; main is branch-protected).
+echo "▶ pre-commit: running lint-staged on staged files…"
+npx lint-staged --allow-empty
+rc=$?
+if [ $rc -ne 0 ]; then
+  echo "✗ pre-commit FAILED (exit $rc). Fix issues above and re-stage, or use --no-verify for a WIP commit."
+  exit $rc
+fi
+echo "✓ pre-commit passed."

@@ -8,7 +8,7 @@ A scalable, governed data platform reference architecture — built as a multi-p
 
 The platform is deployed to GitHub Pages from the public mirror repo. Anyone can browse the latest state without signing an NDA:
 
-### <https://testdemoqwenai2025-creator.github.io/DemoAppDataSci/>
+### <https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/>
 
 Bookmark this URL — it updates automatically on every push to `main` via the GitHub Actions deploy workflow in `.github/workflows/deploy-pages.yml`. No dev server required.
 
@@ -63,16 +63,16 @@ Papers inspire patterns. Patterns become architecture. Architecture is observed 
 
 | Repository | Visibility | Purpose | URL |
 | --- | --- | --- | --- |
-| `AppDataSci-Advanced` | **Private** | Source of truth — development & modifications happen here | <https://github.com/testdemoqwenai2025-creator/AppDataSci-Advanced> |
-| `DemoAppDataSci` | **Public** | Preview mirror — anyone can browse without an NDA | <https://github.com/testdemoqwenai2025-creator/DemoAppDataSci> |
-| `DemoAppDataSci` Pages site | **Public** | 24/7/365 live preview | <https://testdemoqwenai2025-creator.github.io/DemoAppDataSci/> |
+| `AppDataSci3-Advanced` | **Private** | Source of truth — development & modifications happen here | <https://github.com/testdemoqwenai2025-creator/AppDataSci3-Advanced> |
+| `Demo3AppDataSci` | **Public** | Preview mirror — anyone can browse without an NDA | <https://github.com/testdemoqwenai2025-creator/Demo3AppDataSci> |
+| `Demo3AppDataSci` Pages site | **Public** | 24/7/365 live preview | <https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/> |
 
 ### Sync + deploy workflows
 
 Two GitHub Actions workflows run on the private repo:
 
 1. **`sync-to-public.yml`** — on every push to `main`, force-pushes the commit to the public repo. The public preview always reflects the latest state of the advanced repo, with no manual intervention.
-2. **`deploy-pages.yml`** (on the public repo, mirrored from private) — on every push to `main` on the public repo, builds the static export with `GITHUB_PAGES=true` (basePath `/DemoAppDataSci`) and deploys to GitHub Pages via the official `actions/deploy-pages` action.
+2. **`deploy-pages.yml`** (on the public repo, mirrored from private) — on every push to `main` on the public repo, builds the static export with `GITHUB_PAGES=true` (basePath `/Demo3AppDataSci`) and deploys to GitHub Pages via the official `actions/deploy-pages` action.
 
 ## Getting started (local dev)
 
@@ -99,11 +99,26 @@ A 6-page project PDF lives at [`download/ModernDataSciEng-Platform.pdf`](./downl
 - [`FUTURE_TECH.md`](./FUTURE_TECH.md) — 24-36 month technology watch list across 8 categories, with explicit "what I'm NOT betting on" section
 - [`worklog.md`](./worklog.md) — append-only multi-agent work log
 
+## Guardrails
+
+This repo enforces quality pre-commit so broken code never lands on `main`:
+
+- **Husky pre-commit hook** (`.husky/pre-commit`) runs `lint-staged` on every commit.
+- **`lint-staged`** (defined in `package.json`) executes against staged files only:
+  - `**/*.{ts,tsx}` → `eslint --fix` + `prettier --write`
+  - `**/*.{js,cjs,mjs}` → `eslint --fix` + `prettier --write`
+  - `**/*.{json,md,css}` → `prettier --write`
+- **Pre-push hook** (`.husky/pre-push`) scans pushed commits for leaked secrets (GitHub PATs, AWS keys, OpenAI keys) and refuses the push if any are detected.
+- A standalone **`scripts/pre-push-guardrail.sh`** script remains for manual sanity checks (full `tsc --noEmit` + secret scan) before a release.
+- If a hook is in your way (e.g. WIP commit), you can bypass with `git commit --no-verify` / `git push --no-verify`.
+
+Setup is automatic on `bun install` (the `"prepare": "husky"` script in `package.json` installs the git hooks).
+
 ## Contact
 
 - Email: `testdemoqwenai2025@gmail.com`
 - GitHub: [@testdemoqwenai2025-creator](https://github.com/testdemoqwenai2025-creator)
-- Live preview: <https://testdemoqwenai2025-creator.github.io/DemoAppDataSci/>
+- Live preview: <https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/>
 
 ## Licence
 
