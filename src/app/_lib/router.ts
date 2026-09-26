@@ -137,14 +137,24 @@ export type PageId =
   | "living-gbm"
   | "resources"
   | "future"
-  | "genealogy";
+  | "genealogy"
+  | "constellation"
+  | "recent"
+  | "favorites"
+  | "climate-science"
+  | "aviation"
+  | "robotics"
+  | "audio-signal"
+  | "insurance"
+  | "causal-inference"
+  | "rlhf";
 
 export interface PageMeta {
   id: PageId;
   label: string;
   shortLabel: string;
-  group: "Overview" | "Ingestion" | "Storage & Compute" | "Transformation" | "Analytics" | "Governance" | "Delivery" | "About" | "Knowledge Loop" | "Modern Big Data" | "Databases" | "Streaming" | "Columnar" | "Patterns" | "Data Mesh" | "DataFrames" | "Machine Learning" | "Deep Learning" | "MLOps" | "GenAI" | "Reinforcement Learning" | "LLM Training" | "Transformer" | "Computational Science" | "Generative AI" | "Computer Vision" | "Diffusion Models" | "Distributed Training" | "MLOps & Tracing" | "Quantization & Inference" | "Inference Serving" | "RAG Deep Dive" | "Multi-modal RAG" | "Bioinformatics" | "Cheminformatics" | "Molecular Modelling" | "Genetic Materials" | "Macro Structures" | "Systems Biology" | "Cryo-EM" | "Spatial Transcriptomics" | "Single-cell Multi-omics" | "AlphaMissense" | "AlphaProteo" | "Boltz" | "AI Drug Discovery" | "Spatial Multi-omics" | "Coevolution & DCA" | "Neural Network Potentials" | "Enhanced Sampling" | "Generative Chemistry 2.0" | "Quantum Computing" | "Space Science" | "Fintech" | "Data Lakehouse" | "Apache Iceberg" | "AWS Glue" | "Apache Hudi" | "Delta Lake" | "Catalogs" | "Apache Pinot" | "Apache Paimon" | "Apache Druid" | "Apache Impala" | "StarRocks" | "Kafka Connect" | "Schema Registry" | "Lineage" | "Data Contracts" | "Tabular" | "Databricks Lakehouse" | "Snowflake Polaris" | "AWS Lake Formation" | "Apache Flink" | "Apache Kafka" | "Apache Pulsar" | "Spark Streaming" | "Google BigQuery" | "AWS Redshift" | "ClickHouse" | "dbt Deep Dive" | "Apache Airflow" | "Dagster" | "Great Expectations" | "Monte Carlo" | "Elementary" | "MLflow Deep Dive" | "Feature Store Deep Dive" | "Vector DB Deep Dive" | "LLMOps" | "Data Mesh Deep Dive" | "Streaming SQL" | "Data Contracts Deep Dive" | "Privacy Enhancing Tech" | "NumPy SciPy" | "Dask Ray" | "GPU Computing" | "Jupyter" | "Transformer Deep Dive" | "Diffusion Models Deep Dive" | "Fine-Tuning Deep Dive" | "Agent Frameworks" | "Computational Biology" | "Computational Chemistry" | "Computational Physics" | "Bioinformatics Pipelines" | "Elegant Code";
-  icon: string;
+  group: "Overview" | "Ingestion" | "Storage & Compute" | "Transformation" | "Analytics" | "Governance" | "Delivery" | "About" | "Knowledge Loop" | "Modern Big Data" | "Databases" | "Streaming" | "Columnar" | "Patterns" | "Data Mesh" | "DataFrames" | "Machine Learning" | "Deep Learning" | "MLOps" | "GenAI" | "Reinforcement Learning" | "LLM Training" | "Transformer" | "Computational Science" | "Generative AI" | "Computer Vision" | "Diffusion Models" | "Distributed Training" | "MLOps & Tracing" | "Quantization & Inference" | "Inference Serving" | "RAG Deep Dive" | "Multi-modal RAG" | "Bioinformatics" | "Cheminformatics" | "Molecular Modelling" | "Genetic Materials" | "Macro Structures" | "Systems Biology" | "Cryo-EM" | "Spatial Transcriptomics" | "Single-cell Multi-omics" | "AlphaMissense" | "AlphaProteo" | "Boltz" | "AI Drug Discovery" | "Spatial Multi-omics" | "Coevolution & DCA" | "Neural Network Potentials" | "Enhanced Sampling" | "Generative Chemistry 2.0" | "Quantum Computing" | "Space Science" | "Fintech" | "Data Lakehouse" | "Apache Iceberg" | "AWS Glue" | "Apache Hudi" | "Delta Lake" | "Catalogs" | "Apache Pinot" | "Apache Paimon" | "Apache Druid" | "Apache Impala" | "StarRocks" | "Kafka Connect" | "Schema Registry" | "Lineage" | "Data Contracts" | "Tabular" | "Databricks Lakehouse" | "Snowflake Polaris" | "AWS Lake Formation" | "Apache Flink" | "Apache Kafka" | "Apache Pulsar" | "Spark Streaming" | "Google BigQuery" | "AWS Redshift" | "ClickHouse" | "dbt Deep Dive" | "Apache Airflow" | "Dagster" | "Great Expectations" | "Monte Carlo" | "Elementary" | "MLflow Deep Dive" | "Feature Store Deep Dive" | "Vector DB Deep Dive" | "LLMOps" | "Data Mesh Deep Dive" | "Streaming SQL" | "Data Contracts Deep Dive" | "Privacy Enhancing Tech" | "NumPy SciPy" | "Dask Ray" | "GPU Computing" | "Jupyter" | "Transformer Deep Dive" | "Diffusion Models Deep Dive" | "Fine-Tuning Deep Dive" | "Agent Frameworks" | "Computational Biology" | "Computational Chemistry" | "Computational Physics" | "Bioinformatics Pipelines" | "Elegant Code" | "Platform Tools" | "Climate Science" | "Aviation" | "Robotics" | "Audio Signal" | "Insurance" | "Causal Inference" | "RLHF" | "Living Equations";
+    icon: string;
   description: string;
 }
 
@@ -1197,6 +1207,86 @@ export const PAGES: PageMeta[] = [
     group: "Living Equations",
     icon: "History",
     description: "Interactive D3.js vertical timeline of the math discoveries that power this platform — from Bernoulli 1713 (probability) through Beltrami 1873 (SVD) and Kalman 1960 (filter) to Vaswani 2017 (Attention) and Jumper 2021 (AlphaFold2). Each milestone links to the platform page that builds on it. Hover any milestone for context; click to navigate. Makes visceral that the math outlasts the tools by 10× or more.",
+  },
+  {
+    id: "constellation",
+    label: "Skill Constellation Explorer — interactive graph of all 130+ topics",
+    shortLabel: "Constellation",
+    group: "Platform Tools",
+    icon: "Network",
+    description: "Tier 3 flagship. Interactive D3 force-directed graph of every page on the platform — nodes colour-coded by topic group, edges derived from cross-domain connections (shared equations, shared skills, shared elegant-code cards). Click any node to navigate. Hover for a preview card with last-updated date and thought count.",
+  },
+  {
+    id: "recent",
+    label: "Recently visited — your navigation history",
+    shortLabel: "Recent",
+    group: "Platform Tools",
+    icon: "History",
+    description: "Personal navigation timeline. Every page you visit is logged to localStorage (cap 30) and rendered here as a vertical timeline with timestamps. Useful for the 'where was I?' loop — closes the discovery → recall → continue circuit without server-side tracking.",
+  },
+  {
+    id: "favorites",
+    label: "Favorites — pages and cards you've starred",
+    shortLabel: "Favorites",
+    group: "Platform Tools",
+    icon: "Star",
+    description: "Personal collection. Star any page (button in PageHeader) and it appears here. Persisted to localStorage — survives session restarts. Useful for keeping your top-5 reference pages one click away.",
+  },
+  {
+    id: "climate-science",
+    label: "Climate Science — CMIP6, downscaling, extreme value theory",
+    shortLabel: "Climate",
+    group: "Climate Science",
+    icon: "CloudRain",
+    description: "From CMIP6 global circulation models to regional downscaling, from 100-year flood VaR to drought probability. The natural home for the VaR and Bayes cards when they're applied to climate scenarios. Covers reanalysis (ERA5), emissions scenarios (SSP/RCP), and the generalized extreme value (GEV) distribution.",
+  },
+  {
+    id: "aviation",
+    label: "Aviation — ADS-B, great-circle routing, ATC conflict resolution",
+    shortLabel: "Aviation",
+    group: "Aviation",
+    icon: "Plane",
+    description: "Flight tracking via ADS-B, great-circle routes (Haversine), Kalman filtering for trajectory estimation, FAA NextGen ADS-B mandates, ATC conflict resolution via LP. The aviation home for the Haversine and Kalman living-equation cards.",
+  },
+  {
+    id: "robotics",
+    label: "Robotics — SLAM, motion planning, MPC, state estimation",
+    shortLabel: "Robotics",
+    group: "Robotics",
+    icon: "Bot",
+    description: "Simultaneous localization and mapping (SLAM), model predictive control (MPC), motion planning (A*, RRT), state estimation (Extended Kalman Filter, particle filters). Extends the Kalman card from 'maritime, aviation, genetics' into the physical robotics domain.",
+  },
+  {
+    id: "audio-signal",
+    label: "Audio Signal Processing — MFCC, MP3/AAC, source separation",
+    shortLabel: "Audio",
+    group: "Audio Signal",
+    icon: "AudioWaveform",
+    description: "From MFCCs (Mel-frequency cepstral coefficients) to MP3/AAC psychoacoustic codecs to NMF-based source separation (drums/bass/vocals). Speech recognition (CTC, Transformer transducers). The audio home for the SVD and FFT living-equation cards.",
+  },
+  {
+    id: "insurance",
+    label: "Insurance & Actuarial — loss distributions, credibility, Markov chains",
+    shortLabel: "Insurance",
+    group: "Insurance",
+    icon: "Umbrella",
+    description: "Lloyd's of London syndicates, loss distributions (Poisson frequency × lognormal severity), Bayesian credibility theory, Markov credit-rating transitions, Monte Carlo aggregate loss. The actuarial home for the VaR, Bayes, and Markov cards.",
+  },
+  {
+    id: "causal-inference",
+    label: "Causal Inference — do-calculus, IV, difference-in-differences",
+    shortLabel: "Causal",
+    group: "Causal Inference",
+    icon: "GitFork",
+    description: "Judea Pearl's do-calculus, instrumental variables (IV), difference-in-differences (DiD), propensity score matching, synthetic control. Referenced obliquely in multiple DeeperThoughts — this page gives it a host. Critical for 'did the treatment cause the outcome' questions across A/B tests, policy evaluation, and ML fairness.",
+  },
+  {
+    id: "rlhf",
+    label: "RLHF & DPO — aligning LLMs with human preferences",
+    shortLabel: "RLHF",
+    group: "RLHF",
+    icon: "MessageSquareHeart",
+    description: "Reinforcement Learning from Human Feedback (Christiano 2017, InstructGPT 2022), Proximal Policy Optimization (PPO) on the reward model, Direct Preference Optimization (DPO) as the no-reward-model shortcut. Mentioned in fine-tuning-deep-dive.tsx but warrants its own treatment given how central alignment is to modern LLM training.",
   },
 ];
 

@@ -12,6 +12,8 @@ import { LoginButton } from "./login-button";
 import { ContextualBandit } from "./contextual-bandit";
 import { FloatingLiveButton } from "./floating-live-button";
 import { AskMeAnything } from "./ask-me-anything";
+import { CommandPalette } from "./command-palette";
+import { FavoriteButton } from "./favorite-button";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -31,6 +33,7 @@ const GROUPS: Array<{ title: string; ids: PageId[] }> = [
   { title: "Analytics", ids: ["tableau"] },
   { title: "Governance", ids: ["governance"] },
   { title: "About", ids: ["about"] },
+  { title: "Platform Tools", ids: ["constellation", "recent", "favorites"] },
   { title: "Knowledge Loop", ids: ["knowledge", "dashboard", "evolution", "research"] },
   { title: "Modern Big Data", ids: ["modern-big-data"] },
   { title: "Databases", ids: ["duckdb"] },
@@ -147,6 +150,13 @@ const GROUPS: Array<{ title: string; ids: PageId[] }> = [
     "living-monte-carlo",
     "living-gbm",
   ] },
+  { title: "Climate Science", ids: ["climate-science"] },
+  { title: "Aviation", ids: ["aviation"] },
+  { title: "Robotics", ids: ["robotics"] },
+  { title: "Audio Signal", ids: ["audio-signal"] },
+  { title: "Insurance", ids: ["insurance"] },
+  { title: "Causal Inference", ids: ["causal-inference"] },
+  { title: "RLHF", ids: ["rlhf"] },
 ];
 
 const CONTACT_EMAIL = "testdemoqwenai2025@gmail.com";
@@ -254,6 +264,7 @@ function TopBar({ active, onOpenSidebar }: { active: PageId; onOpenSidebar?: () 
           </div>
         </div>
         <div className="ml-auto flex items-center gap-2">
+          <CommandPalette />
           {/* Return to Home button — visible on every page except home */}
           {!isHome && (
             <Button asChild variant="outline" size="sm" className="gap-1.5">
@@ -266,6 +277,7 @@ function TopBar({ active, onOpenSidebar }: { active: PageId; onOpenSidebar?: () 
           <Badge variant="outline" className="hidden sm:inline-flex gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Prod · v2.4.0
           </Badge>
+          {!isHome && <FavoriteButton pageId={active} />}
           <LoginButton />
           <ThemeToggle />
         </div>

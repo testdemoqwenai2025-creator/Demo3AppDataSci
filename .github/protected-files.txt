@@ -1,0 +1,47 @@
+# Files protected against accidental modification by the guardrail workflow.
+# Both .github/workflows/guardrail-audit.yml AND scripts/pre-push-guardrail.sh
+# read from this single source of truth — eliminating list drift.
+#
+# Format: one glob pattern per line. Lines starting with # are comments.
+# Patterns are matched against the file paths in each commit's diff.
+
+# Core routing + navigation
+src/app/_lib/router.ts
+src/app/_lib/elegant-code-map.ts
+src/app/_lib/thought-counts.ts
+src/app/_lib/thought-quality.ts
+src/app/_lib/page-dates.ts
+
+# Global shell + footer (every page renders through these)
+src/app/layout.tsx
+src/app/_components/app-shell.tsx
+src/app/_components/footer-content.tsx
+
+# GitHub workflows — guardrail-audit.yml itself is protected (no self-modification)
+.github/workflows/guardrail-audit.yml
+.github/workflows/sync-to-public.yml
+.github/workflows/sync-from-private.yml
+.github/workflows/deploy-pages.yml
+
+# Husky hooks (the guardrail enforces itself)
+.husky/pre-commit
+.husky/pre-push
+
+# Protected config files
+package.json
+package-lock.json
+bun.lock
+next.config.ts
+tsconfig.json
+.prettierrc.json
+.prettierignore
+.eslintrc*
+eslint.config.mjs
+
+# Build outputs (should never be committed)
+.next/
+out/
+node_modules/
+
+# This file itself
+.github/protected-files.txt

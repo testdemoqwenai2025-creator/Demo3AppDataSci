@@ -4777,3 +4777,50 @@ Stage Summary:
 - Recommendations catalog preserved across sessions (survives sandbox resets).
 - Tier 1 items remain unaddressed — recommended to revisit when Tier 3 work pauses or as quick between-session filler tasks.
 - Tier 3 T3.1 (skill-constellation.tsx refactor + /constellation route) is the next concrete work item.
+
+---
+Task ID: tier-3-batch-execution-session-1
+Agent: Super Z (main)
+Task: Execute Tier 3 batch from improvement-recommendations.txt. User chose to begin Tier 3 directly (skipping Tier 1+2 cleanups). Scope: 7 new content pages (#35-41), Cmd+K global search palette (#43), /recent page (#44), favorites feature (#46), Skill Constellation Explorer T3.1 (the flagship), plus architecture items #57 (centralized protected-files), #58 (Makefile), #30 (dependabot).
+
+Work Log:
+- Read router.ts (PageId union + PAGES array + group type), existing _pages/arrow.tsx (template structure), _components/skill-constellation.tsx (existing pre-T3.1 implementation), _components/section-card.tsx (PageHeader + SectionCard APIs), _components/next-steps.tsx (related-pages interface), _components/code-block.tsx (props = {code, language, filename}), _components/icon.tsx (dynamic lucide lookup).
+- router.ts: Added 10 new PageId entries (constellation, recent, favorites, climate-science, aviation, robotics, audio-signal, insurance, causal-inference, rlhf). Added 9 new groups to PageMeta.group union (Platform Tools, Climate Science, Aviation, Robotics, Audio Signal, Insurance, Causal Inference, RLHF, Living Equations). Added 10 new PAGES entries with label/shortLabel/group/icon/description.
+- _pages/climate-science.tsx (NEW, ~280 lines): KPIs (CMIP6, ERA5, GEV, SSP5-8.5), flood frequency GEV code in Python, CMIP6 open-data sources, 3 families of downscaling (dynamical/statistical/ML), connections to fintech/Kalman/Monte Carlo/insurance, 3 DeeperThoughts.
+- _pages/aviation.tsx (NEW, ~290 lines): KPIs (ADS-B msg rate, FAA NextGen, Haversine, trajectory Kalman), Haversine code in Python (LHR-JFK, LHR-SIN), ADS-B + NextGen explanation, Kalman filter on ADS-B trajectories code, ATC conflict resolution via LP, connections to living-haversine/living-kalman/global-shipping/robotics, 3 DeeperThoughts.
+- _pages/robotics.tsx (NEW, ~250 lines): KPIs (LiDAR cost, Atlas DOF, MPC horizon, RRT* complexity), EKF-SLAM code skeleton, motion planning (A*, RRT, RRT*), MPC for autonomous vehicle (cvxpy code), connections to living-kalman/aviation/living-fft/living-svd, 3 DeeperThoughts.
+- _pages/audio-signal.tsx (NEW, ~270 lines): KPIs (CD sample rate, MP3 compression, MFCC count, Whisper params), MFCC extraction code in Python (librosa), MP3/AAC psychoacoustic compression, NMF source separation code, 3-era speech recognition timeline (HMM-GMM/hybrid DNN-HMM/Transformers), connections to living-fft/living-svd/transformer-deep-dive/living-entropy, 3 DeeperThoughts.
+- _pages/insurance.tsx (NEW, ~300 lines): KPIs (Lloyd's premium, Solvency II, cat bond market, MC accuracy), compound Poisson-lognormal loss code (1M MC sims), Bühlmann credibility code, Markov credit transitions explanation, connections to fintech/living-monte-carlo/climate-science/living-black-scholes, 3 DeeperThoughts.
+- _pages/causal-inference.tsx (NEW, ~290 lines): KPIs (DiD/IV/Pearl/Synthetic control), Pearl's do-calculus explanation, IV-2SLS code (linearmodels), DiD code (statsmodels clustered SE), connections to fintech/rl-agentic/model-monitoring/living-monte-carlo, 3 DeeperThoughts.
+- _pages/rlhf.tsx (NEW, ~280 lines): KPIs (InstructGPT, PPO clip, DPO paper, Llama-3.1 win rate), 3-stage alignment pipeline (SFT/reward model/PPO), PPO code sketch, DPO closed-form loss code, connections to fine-tuning-deep-dive/rl-agentic/transformer-deep-dive/living-entropy, 3 DeeperThoughts.
+- Created 10 new route files in src/app/<page>/page.tsx, each one-line wrapper importing from _pages/.
+- _pages/constellation.tsx (NEW, ~420 lines): T3.1 flagship. D3 force-directed graph of all PAGES (excludes home). Nodes colour-coded by group (24 distinct GROUP_COLORS oklch values), sized by thought count. Edges: intra-group adjacency (every adjacent pair within a group, lighter weight) + 30 curated cross-domain edges (heavier weight, e.g., aviation-living-kalman, insurance-climate-science, rlhf-living-entropy). Search box filters nodes by label/group/description. Hover shows preview card with thought count + quality + last-updated date. Click navigates to the page. Drag to reposition nodes. ResizeObserver for responsive SVG sizing. Legend section.
+- _pages/recent.tsx (NEW): vertical timeline of recent page visits from localStorage, with formatted timestamps ("just now", "5 min ago", "3 hr ago", "2 days ago", or full date for older). Clear-history button. Empty-state CTA.
+- _pages/favorites.tsx (NEW): grid of starred pages from localStorage, with remove-from-favorites per card. Clear-all button. Empty-state CTA.
+- _lib/use-navigation-history.ts (NEW): useRecentPages hook (tracks pathname → localStorage["recent-pages-v1"], cap 30, dedupe by id) + useFavorites hook (toggle PageId in localStorage["favorite-pages-v1"], cap 100).
+- _components/command-palette.tsx (NEW): Cmd+K / Ctrl+K global search using @/components/ui/command (cmdk). Searches across all PAGES by shortLabel + label + description + group. Shows starred pages at top. Hidden search button in TopBar (desktop only) reveals palette on click. "/" shortcut also opens (Gmail/GitHub convention) — guarded against typing in inputs.
+- _components/favorite-button.tsx (NEW): star button in TopBar, hydration-safe (reads localStorage on mount). aria-pressed state. Yellow fill when favorited.
+- _components/app-shell.tsx (MODIFIED): imported CommandPalette + FavoriteButton. Added "Platform Tools" sidebar group with constellation/recent/favorites. Added 7 new sidebar groups (Climate Science, Aviation, Robotics, Audio Signal, Insurance, Causal Inference, RLHF). Mounted CommandPalette button in TopBar (between Home button and Prod badge). Mounted FavoriteButton (visible on non-home pages only, between Prod badge and LoginButton).
+- .github/protected-files.txt (NEW): single source of truth for files that the guardrail workflow protects. Replaces the duplicated list in guardrail-audit.yml + pre-push-guardrail.sh. Lists router.ts, app-shell.tsx, layout.tsx, all workflows, husky hooks, package.json, configs.
+- Makefile (NEW): common dev commands — install, dev, build, build-static, lint, lint-fix, typecheck, format, format-check, audit, test, clean, analyze, db-*, ci, sync-to-public. Uses bun if available, falls back to npm. Self-documenting via `make help`.
+- .github/dependabot.yml (NEW): weekly checks on npm + github-actions ecosystems. Groups minor+patch updates together (avoid PR spam), keeps major updates as separate PRs. Auto-assigns PRs to repo owner, labels for filtering.
+- Fixed TypeScript issues: (1) added "Living Equations" to PageMeta.group union (was missing — every Living Equations page was failing typecheck); (2) converted all <CodeBlock>{VARIABLE}</CodeBlock> usages to <CodeBlock code={VARIABLE} /> in 7 new pages via Python regex; (3) fixed constellation.tsx Set<PageId> typing and d3 drag call cast (matches existing skill-constellation.tsx pattern); (4) fixed insurance.tsx JSX expression issue (L = Σ_{i=1}^{N} X_i — the {i=1} was parsed as JSX expression, replaced with plain text).
+- All 10 new pages verified via dev server smoke test: every route returns HTTP 200. Home, about, fintech, living-fft also still return HTTP 200 (no regression).
+- Verified new sidebar groups render on home page (all 11 new group labels found in HTML).
+- Verified CommandPalette button ("Open command palette" / "⌘K"), FavoriteButton star ("aria-label='Add to favorites'"), and constellation SVG all render on live dev server.
+- All new files pass tsc --noEmit cleanly (verified by grepping tsc output for new file paths — no errors).
+
+Stage Summary:
+- 7 new content pages live: /climate-science, /aviation, /robotics, /audio-signal, /insurance, /causal-inference, /rlhf
+- 1 new flagship page: /constellation (Tier 3 T3.1 — Skill Constellation Explorer)
+- 2 new platform tool pages: /recent (navigation history), /favorites (starred pages)
+- 1 new global feature: Cmd+K / Ctrl+K / "/" command palette (replaces home-only HomeSearch)
+- 1 new per-page feature: star button on every non-home page (persisted to localStorage)
+- 3 new architecture artifacts: .github/protected-files.txt, Makefile, .github/dependabot.yml
+- Sidebar updated: 9 new groups (Platform Tools + 8 domain groups), all wired to the new pages
+- All 10 new routes verified HTTP 200 on dev server
+- No regressions: existing routes (/about, /fintech, /living-fft) still serve correctly
+- Total platform page count: 140+ (was 130+, +10 new pages)
+- Tier 3 items addressed in this session: #35, #36, #37, #38, #39, #40, #41, #43, #44, #46, #50 (partial — constellation is the foundation), #57, #58, #30 (bonus from Tier 2)
+- Tier 3 items NOT addressed (deferred to future sessions): #42 (58 missing RelatedTopics), #45 (/compare page), #47 (custom learning paths), #48 (quiz mode), #49 (per-page OG images), #51 (print/PDF), #52 (share-link deep links), #53 (split _elegant_code_cards.tsx), #54 (extract _dataset_examples to JSON), #55 (unit tests), #56 (Playwright e2e), #59 (webhook → repository_dispatch)
+- T3.2-T3.5 Skill Constellation follow-ups remain: click-to-navigate polish (already works), hover preview cards (already works), cross-domain edges (already implemented), 3D mode toggle (T3.4), performance + virtualisation (T3.5)
