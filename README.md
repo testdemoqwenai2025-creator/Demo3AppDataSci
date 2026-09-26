@@ -1,124 +1,50 @@
-# ModernDataSciEng Platform
+# Demo3AppDataSci
 
-A scalable, governed data platform reference architecture — built as a multi-page application (MPA) showcasing a complete, single-source-of-truth analytics stack for a hypothetical omnichannel retailer (ModernDataSciEng Ltd).
+**Public preview endpoint for the ModernDataSciEng Platform.**
 
-> **Synthetic data disclaimer:** every number, schema, pipeline, dashboard and business name in this reference is **synthetic and hypothetical**. No real personal data is processed, stored or transmitted. See the in-app **About & Compliance** page for full GDPR details.
+This repository is a **preview-only mirror** — it does NOT contain source code.
 
-## Live preview (24/7/365)
+## Where is the source code?
 
-The platform is deployed to GitHub Pages from the public mirror repo. Anyone can browse the latest state without signing an NDA:
+The full source lives in the **private** repository:
+**[AppDataSci3-Advanced](https://github.com/testdemoqwenai2025-creator/AppDataSci3-Advanced)****
+
+All development, contributions, and issue tracking happen there.
+
+## Live preview
+
+The built static site is served from the `gh-pages` branch:
 
 ### <https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/>
 
-Bookmark this URL — it updates automatically on every push to `main` via the GitHub Actions deploy workflow in `.github/workflows/deploy-pages.yml`. No dev server required.
+It updates automatically on every push to `main` on the private repo, via the
+`deploy-pages.yml` GitHub Actions workflow.
 
-> **Note**: the agentic DQ triage feature (`/api/agent-triage`) requires a runtime backend and is only available on the dev preview, not on the static GitHub Pages site. The Live Dashboard's anomaly feed still ticks on Pages — but agent hypothesis cards fall back to a deterministic stub when the API is unavailable.
+## Why is `main` empty?
 
-## What's inside
+Per the project's architecture:
 
-A 15-page MPA covering every layer of a modern data platform + a Knowledge Loop that closes the circuit between academic research and production architecture:
+- **Private repo (`AppDataSci3-Advanced`)**: source of truth — all source
+  code, worklog, design docs, configs, scripts.
+- **Public repo (`Demo3AppDataSci`)**: HTML-only preview endpoint — built
+  static site served via GitHub Pages from the `gh-pages` branch.
 
-### Architecture pages (11)
+This separation ensures interested parties can preview the platform without
+signing an NDA, while keeping the source code private.
 
-| Page | Scope |
-| --- | --- |
-| **Overview** | Executive KPIs, mini architecture, design principles, search box, Get Started CTA |
-| **Reference Architecture** | End-to-end sources → Bronze → Silver → Gold → consumption diagram |
-| **Fivetran & Hightouch** | ELT ingestion (14 sources) + reverse-ETL activation (5 audiences) |
-| **Databricks Lakehouse** | PySpark, Delta Lake, Medallion (Bronze/Silver/Gold), Photon runtime |
-| **Snowflake & SQL** | Multi-cluster warehouses, RBAC, Gold serving views, cluster keys |
-| **dbt & Dimensional Modelling** | 312 models, 1,184 tests, SCD2, MetricFlow semantic layer, slim CI |
-| **Orchestration** | Airflow DAGs + Dagster asset graph, SLA monitoring |
-| **Tableau & Analytics** | Certified datasets, RLS, sample dashboards |
-| **Data Governance & Observability** | Unity Catalogue, Monte Carlo, OpenLineage |
-| **CI/CD & DevOps** | Git trunk flow, GitHub Actions, Terraform, OIDC, FinOps |
-| **About & Compliance** | Mission, synthetic-data disclaimer, GDPR rights table, contact, repo links |
-
-### Knowledge Loop pages (4)
-
-| Page | Scope |
-| --- | --- |
-| **Knowledge Hub** | 12 Architecture Decision Records, 8 reusable patterns, 4 trade-off matrices, 10 Knowledge Shorts |
-| **Live Dashboard** | Synthetic real-time observatory — pipeline runs tick every 3s, cost meter, anomaly feed, **agentic DQ triage agent** wired into every anomaly, what-if simulator |
-| **Evolution Timeline** | Versioned history v1.0 → v3.0, technology radar (29 items), 4-horizon future roadmap |
-| **Research Papers** | 16 academic foundations (MapReduce, RDDs, Delta Lake, Kimball, Lakehouse, OpenLineage…), interactive citation graph |
-
-### The Knowledge Loop
+## Repository structure
 
 ```
-Research → Knowledge → Architecture → Dashboard → back to Research
+Demo3AppDataSci/
+├── main/         ← this branch: stub README (this file) only
+└── gh-pages/    ← built static site (HTML/CSS/JS), force-pushed by deploy-pages.yml
 ```
-
-Papers inspire patterns. Patterns become architecture. Architecture is observed in the live dashboard. Observations drive new research. The platform is never finished — it's an ongoing conversation between theory and production.
-
-## Tech stack
-
-- **Framework:** Next.js 16 (App Router) + TypeScript 5
-- **Styling:** Tailwind CSS 4 + shadcn/ui
-- **Charts:** Recharts
-- **Theme:** next-themes (light/dark toggle on every page)
-- **Agentic layer:** z-ai-web-dev-sdk (GLM-4-Plus LLM) via `/api/agent-triage`
-
-## Repositories
-
-| Repository | Visibility | Purpose | URL |
-| --- | --- | --- | --- |
-| `AppDataSci3-Advanced` | **Private** | Source of truth — development & modifications happen here | <https://github.com/testdemoqwenai2025-creator/AppDataSci3-Advanced> |
-| `Demo3AppDataSci` | **Public** | Preview mirror — anyone can browse without an NDA | <https://github.com/testdemoqwenai2025-creator/Demo3AppDataSci> |
-| `Demo3AppDataSci` Pages site | **Public** | 24/7/365 live preview | <https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/> |
-
-### Sync + deploy workflows
-
-Two GitHub Actions workflows run on the private repo:
-
-1. **`sync-to-public.yml`** — on every push to `main`, force-pushes the commit to the public repo. The public preview always reflects the latest state of the advanced repo, with no manual intervention.
-2. **`deploy-pages.yml`** (on the public repo, mirrored from private) — on every push to `main` on the public repo, builds the static export with `GITHUB_PAGES=true` (basePath `/Demo3AppDataSci`) and deploys to GitHub Pages via the official `actions/deploy-pages` action.
-
-## Getting started (local dev)
-
-```bash
-bun install
-bun run dev              # http://localhost:3000  (full preview incl. agent API)
-bun run lint
-bun run build:static     # static export with GITHUB_PAGES=true for Pages-style build
-```
-
-**Demo login** (on the Sign in button in the header):
-- Username: `admin`
-- Password: `admin`
-- Or click "Auto-fill & sign in" — the form pre-fills and submits in one click.
-
-## Project PDF
-
-A 6-page project PDF lives at [`download/ModernDataSciEng-Platform.pdf`](./download/ModernDataSciEng-Platform.pdf). It covers executive summary, reference architecture, the 15 pages, the Knowledge Loop, GDPR compliance, future technology thoughts, and contact. Generated by `scripts/generate-project-pdf.py`.
-
-## Companion docs in repo root
-
-- [`SKILLS.md`](./SKILLS.md) — 18-capability skills matrix, 4 role profiles, FY25 skills under development
-- [`AGENTIC_WORKFLOW.md`](./AGENTIC_WORKFLOW.md) — Today (deterministic) vs Future (agentic) operating models, 5 agent designs, 8 guardrails, LangGraph sketch
-- [`FUTURE_TECH.md`](./FUTURE_TECH.md) — 24-36 month technology watch list across 8 categories, with explicit "what I'm NOT betting on" section
-- [`worklog.md`](./worklog.md) — append-only multi-agent work log
-
-## Guardrails
-
-This repo enforces quality pre-commit so broken code never lands on `main`:
-
-- **Husky pre-commit hook** (`.husky/pre-commit`) runs `lint-staged` on every commit.
-- **`lint-staged`** (defined in `package.json`) executes against staged files only:
-  - `**/*.{ts,tsx}` → `eslint --fix` + `prettier --write`
-  - `**/*.{js,cjs,mjs}` → `eslint --fix` + `prettier --write`
-  - `**/*.{json,md,css}` → `prettier --write`
-- **Pre-push hook** (`.husky/pre-push`) scans pushed commits for leaked secrets (GitHub PATs, AWS keys, OpenAI keys) and refuses the push if any are detected.
-- A standalone **`scripts/pre-push-guardrail.sh`** script remains for manual sanity checks (full `tsc --noEmit` + secret scan) before a release.
-- If a hook is in your way (e.g. WIP commit), you can bypass with `git commit --no-verify` / `git push --no-verify`.
-
-Setup is automatic on `bun install` (the `"prepare": "husky"` script in `package.json` installs the git hooks).
 
 ## Contact
 
 - Email: `testdemoqwenai2025@gmail.com`
 - GitHub: [@testdemoqwenai2025-creator](https://github.com/testdemoqwenai2025-creator)
-- Live preview: <https://testdemoqwenai2025-creator.github.io/Demo3AppDataSci/>
+- Source repo: [AppDataSci3-Advanced](https://github.com/testdemoqwenai2025-creator/AppDataSci3-Advanced)
 
 ## Licence
 
