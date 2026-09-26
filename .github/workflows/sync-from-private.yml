@@ -70,7 +70,7 @@ jobs:
           echo "SYNC_FROM_PRIVATE_PAT is set."
 
       - name: Checkout THIS (public mirror) repo with full history
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           # Use the built-in GITHUB_TOKEN for write access to this repo.
