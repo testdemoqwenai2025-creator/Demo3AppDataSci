@@ -4759,3 +4759,21 @@ Stage Summary:
   - Session 3: Add cross-domain edges (data->ML, ML->science, science->fintech, etc.) sourced from the related-topics component data.
   - Session 4: 3D mode toggle (2D d3-force <-> 3D three.js force-directed layout) with smooth camera transitions.
   - Session 5: Performance pass — virtualise nodes > 200, lazy-load three.js, SSR fallback for static GitHub Pages build.
+
+---
+Task ID: improvement-recommendations-audit
+Agent: Super Z (main)
+Task: Comprehensive codebase audit on AppDataSci3-Advanced (HEAD c86f49d1) — produce a prioritized list of 59 improvements across Tier 1 (quick wins), Tier 2 (1-3 sessions), Tier 3 (multi-session). Save as improvement-recommendations.txt at repo root for future reference. User has chosen to begin Tier 3 Skill Constellation Explorer directly rather than addressing Tier 1/2 first.
+
+Work Log:
+- Audited codebase for: bugs (latency_ms bug, broken NextResponse import, duplicate /api/api/ directory), stale text ("10 cards" → 20, "15 pages" → 131), accessibility gaps (aria-pressed, role=dialog), performance issues (109 silent tsc errors, 152KB KaTeX CSS on every page, no bundle analyzer, unused heavy deps), SEO gaps (single shared <title>, no sitemap.ts, OG URL points to chat.z.ai, no OG image, no JSON-LD, external icon), observability gaps (no analytics, no error boundary, no loading.tsx, no rate limiting), CI gaps (no tsc in CI, no Dependabot, no PR template, stale 15-route list in test.py, hardcoded paths in scripts, duplicated protected-files list).
+- Identified 59 concrete improvements organized into 3 tiers.
+- Recommended top-5 highest-leverage starting points: lazy-load KaTeX CSS (#13), lazy-load D3 + Pyodide components (#16), per-page metadata (#18), symmetrize CARD_NEIGHBORS (#6), CI runs tsc (#29).
+- Saved recommendations to /improvement-recommendations.txt (plain text, ~13KB, human-readable with tables).
+- User decision: begin Tier 3 Skill Constellation Explorer (multi-session flagship) directly — T3.1 through T3.5 plan documented in worklog entry github-v3-multi-repo-setup.
+
+Stage Summary:
+- improvement-recommendations.txt committed at repo root for future reference.
+- Recommendations catalog preserved across sessions (survives sandbox resets).
+- Tier 1 items remain unaddressed — recommended to revisit when Tier 3 work pauses or as quick between-session filler tasks.
+- Tier 3 T3.1 (skill-constellation.tsx refactor + /constellation route) is the next concrete work item.
